@@ -1,23 +1,23 @@
 /**
- * 游客类，继承自Person
- * 用于跟踪主题公园游客信息，支持CSV格式解析（文件IO用）
+ * Visitor class extending Person
+ * Tracks theme park visitors and supports CSV parsing for file I/O operations
  */
 public class Visitor extends Person {
-    // 2个专属实例变量（符合游客管理需求）
-    private String ticketType;  // 门票类型（如：单日票、学生票、年卡）
-    private String visitDate;   // 参观日期（格式：YYYY-MM-DD）
+    // Unique attributes for visitors
+    private String ticketType;  // Ticket type (e.g., "Single Day", "Student", "Annual Pass")
+    private String visitDate;   // Visit date (format: YYYY-MM-DD)
 
-    // 无参构造器
+    // Default constructor
     public Visitor() {}
 
-    // 带参构造器（初始化父类属性+子类专属属性）
+    // Parameterized constructor (initializes parent and child attributes)
     public Visitor(String id, String name, int age, String ticketType, String visitDate) {
-        super(id, name, age);  // 调用父类构造器
+        super(id, name, age);  // Call parent class constructor
         this.ticketType = ticketType;
         this.visitDate = visitDate;
     }
 
-    // Getter方法
+    // Getter methods
     public String getTicketType() {
         return ticketType;
     }
@@ -26,7 +26,7 @@ public class Visitor extends Person {
         return visitDate;
     }
 
-    // Setter方法
+    // Setter methods
     public void setTicketType(String ticketType) {
         this.ticketType = ticketType;
     }
@@ -35,34 +35,38 @@ public class Visitor extends Person {
         this.visitDate = visitDate;
     }
 
-    // 重写toString为CSV格式（用于文件导出/导入）
+    // Override toString for CSV-compatible output (used in export/import)
     @Override
     public String toString() {
         return super.toString() + "," + ticketType + "," + visitDate;
     }
 
-    // 静态方法：从CSV字符串解析为Visitor对象（文件导入用）
+    /**
+     * Static method to parse a CSV string into a Visitor object
+     * Used for importing visitor data from CSV files
+     * @param csvLine Single line of CSV data (format: ID,Name,Age,TicketType,VisitDate)
+     * @return Visitor object if parsing succeeds, null otherwise
+     */
     public static Visitor fromCsvString(String csvLine) {
         if (csvLine == null || csvLine.trim().isEmpty()) {
             return null;
         }
-        // 按逗号分割CSV字段
+
         String[] parts = csvLine.trim().split(",");
-        // 验证字段数（必须包含5个字段：ID、姓名、年龄、门票类型、参观日期）
+        // Validate CSV format (must contain exactly 5 fields)
         if (parts.length != 5) {
             return null;
         }
+
         try {
-            // 解析字段（年龄需转为int）
             String id = parts[0];
             String name = parts[1];
-            int age = Integer.parseInt(parts[2]);
+            int age = Integer.parseInt(parts[2]);  // Parse age to integer
             String ticketType = parts[3];
             String visitDate = parts[4];
-            // 创建并返回Visitor对象
             return new Visitor(id, name, age, ticketType, visitDate);
         } catch (NumberFormatException e) {
-            // 年龄解析失败（非数字）
+            // Return null if age is not a valid integer
             return null;
         }
     }

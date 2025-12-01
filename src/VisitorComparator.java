@@ -1,15 +1,25 @@
 import java.util.Comparator;
 
+/**
+ * Custom comparator for sorting Visitor objects
+ * Sorts by age (ascending) first, then by name (alphabetical, case-insensitive)
+ * Used for sorting ride history (Part 4B)
+ */
 public class VisitorComparator implements Comparator<Visitor> {
     @Override
     public int compare(Visitor v1, Visitor v2) {
-        // 1. 先按年龄比较（主要条件）
-        int ageCompare = Integer.compare(v1.getAge(), v2.getAge());
-        if (ageCompare != 0) {
-            return ageCompare; // 年龄不同，直接返回结果
+        // Validate input to avoid null pointer exceptions
+        if (v1 == null || v2 == null) {
+            throw new IllegalArgumentException("Visitor objects cannot be null");
         }
-        // 2. 年龄相同，按姓名字典序比较（次要条件，忽略大小写）
+
+        // Primary sort: Age (ascending order)
+        int ageComparison = Integer.compare(v1.getAge(), v2.getAge());
+        if (ageComparison != 0) {
+            return ageComparison;
+        }
+
+        // Secondary sort: Name (alphabetical, case-insensitive)
         return v1.getName().compareToIgnoreCase(v2.getName());
     }
 }
-

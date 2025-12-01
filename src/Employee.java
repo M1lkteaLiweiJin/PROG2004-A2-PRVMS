@@ -1,19 +1,23 @@
+/**
+ * Employee class extending Person
+ * Tracks theme park ride operators and their availability for ride operations
+ */
 public class Employee extends Person {
-    // 2个专属实例变量（符合员工管理需求）
-    private String role;        // 职位（如：游乐设施操作员、维修员）
-    private boolean isAvailable;// 是否可用（用于判断能否运营游乐设施）
+    // Unique attributes for employees
+    private String role;        // Job role (e.g., "Ride Operator", "Maintenance Technician")
+    private boolean isAvailable;// Availability status (true = can operate rides)
 
-    // 无参构造器
+    // Default constructor
     public Employee() {}
 
-    // 带参构造器（初始化父类属性+子类专属属性）
+    // Parameterized constructor (initializes parent and child attributes)
     public Employee(String id, String name, int age, String role, boolean isAvailable) {
-        super(id, name, age);  // 调用父类构造器初始化通用属性
+        super(id, name, age);  // Call parent class constructor
         this.role = role;
         this.isAvailable = isAvailable;
     }
 
-    // Getter方法
+    // Getter methods
     public String getRole() {
         return role;
     }
@@ -22,7 +26,7 @@ public class Employee extends Person {
         return isAvailable;
     }
 
-    // Setter方法
+    // Setter methods
     public void setRole(String role) {
         this.role = role;
     }
@@ -31,9 +35,9 @@ public class Employee extends Person {
         isAvailable = available;
     }
 
-    // 重写toString，包含员工专属信息
+    // Override toString for detailed employee information
     @Override
     public String toString() {
-        return super.toString() + "," + role + "," + (isAvailable ? "可用" : "不可用");
+        return super.toString() + "," + role + "," + (isAvailable ? "Available" : "Unavailable");
     }
 }

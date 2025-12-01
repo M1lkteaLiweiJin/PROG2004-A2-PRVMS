@@ -1,54 +1,54 @@
 /**
- * 游乐设施接口，定义游乐设施的核心行为规范
- * 强制Ride类实现所有抽象方法，确保功能完整性
+ * Interface defining core behaviors for theme park rides
+ * Enforces implementation of queue management, ride history, and operation logic
  */
 public interface RideInterface {
-    // ------------------------------ 队列管理（Part3）------------------------------
+    // ------------------------------ Queue Management (Part 3) ------------------------------
     /**
-     * 添加游客到等待队列
-     * @param visitor 待添加的游客对象
+     * Adds a visitor to the ride's waiting queue (FIFO order)
+     * @param visitor Visitor object to add to the queue
      */
     void addVisitorToQueue(Visitor visitor);
 
     /**
-     * 从等待队列移除队首游客（FIFO）
+     * Removes the first visitor from the waiting queue (FIFO order)
      */
     void removeVisitorFromQueue();
 
     /**
-     * 打印等待队列中所有游客的详细信息
+     * Prints all visitors in the waiting queue with detailed information
      */
     void printQueue();
 
-    // ------------------------------ 乘坐历史管理（Part4）------------------------------
+    // ------------------------------ Ride History Management (Part 4A) ------------------------------
     /**
-     * 添加游客到乘坐历史
-     * @param visitor 待添加的游客对象
+     * Adds a visitor to the ride's historical records (post-ride completion)
+     * @param visitor Visitor object to add to history
      */
     void addVisitorToHistory(Visitor visitor);
 
     /**
-     * 检查游客是否存在于乘坐历史中
-     * @param visitor 待检查的游客对象
-     * @return true=存在，false=不存在
+     * Checks if a visitor exists in the ride's historical records
+     * @param visitor Visitor object to check
+     * @return true if visitor exists in history, false otherwise
      */
     boolean checkVisitorFromHistory(Visitor visitor);
 
     /**
-     * 返回乘坐历史中的游客总数
-     * @return 游客总数
+     * Returns the total number of visitors in the ride's historical records
+     * @return Total count of historical visitors
      */
     int numberOfVisitors();
 
     /**
-     * 打印乘坐历史中所有游客的详细信息（必须用Iterator）
+     * Prints all visitors in the ride's historical records (uses Iterator)
      */
     void printRideHistory();
 
-    // ------------------------------ 运行周期（Part5）------------------------------
+    // ------------------------------ Ride Operation (Part 5) ------------------------------
     /**
-     * 运行游乐设施一个周期
-     * 逻辑：检查操作员→检查队列→取出maxRider名游客→添加到历史→更新运行次数
+     * Runs one complete cycle of the ride
+     * Logic: Validate operator availability → Check queue → Board max riders → Update history
      */
     void runOneCycle();
 }

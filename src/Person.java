@@ -1,20 +1,25 @@
+/**
+ * Abstract base class representing a general person in the theme park
+ * Encapsulates common attributes (ID, name, age) and behaviors for all personnel
+ * Cannot be instantiated directly - serves as parent for Employee and Visitor
+ */
 public abstract class Person {
-    // 3个通用实例变量（私有，符合封装原则）
-    private String id;         // 唯一标识（员工号/游客号）
-    private String name;       // 姓名
-    private int age;           // 年龄
+    // Private instance variables (encapsulation principle)
+    private String id;         // Unique identifier (employee ID/visitor ID)
+    private String name;       // Full name of the person
+    private int age;           // Age (valid range: 1-120)
 
-    // 无参构造器（默认初始化）
+    // Default constructor
     public Person() {}
 
-    // 带参构造器（初始化所有通用属性）
+    // Parameterized constructor to initialize all common attributes
     public Person(String id, String name, int age) {
         this.id = id;
         this.name = name;
         this.age = age;
     }
 
-    // Getter方法（读取属性值）
+    // Getter methods (controlled access to private variables)
     public String getId() {
         return id;
     }
@@ -27,7 +32,7 @@ public abstract class Person {
         return age;
     }
 
-    // Setter方法（修改属性值，添加数据验证）
+    // Setter methods with data validation
     public void setId(String id) {
         this.id = id;
     }
@@ -37,15 +42,15 @@ public abstract class Person {
     }
 
     public void setAge(int age) {
-        // 验证年龄合理性（1-120岁）
+        // Validate age range to ensure data integrity
         if (age > 0 && age <= 120) {
             this.age = age;
         } else {
-            System.out.println("年龄输入无效！请输入1-120之间的数字。");
+            System.out.println("Error: Invalid age! Please enter a value between 1 and 120.");
         }
     }
 
-    // 重写toString方法，便于打印人员信息（后续队列/历史展示用）
+    // Override toString for CSV-compatible output (used in file I/O)
     @Override
     public String toString() {
         return id + "," + name + "," + age;
